@@ -1,32 +1,9 @@
-<!DOCTYPE html>
-{{-- <html lang="{{ str_replace('_', '-', app()->getLocale()) }}"> --}}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+@extends('layouts.app')
 
-    <title>Join EstateCRM - Create Account</title>
+@section('title', 'Join EstateCRM - Create Account')
 
+@section('content')
     <style>
-        *, *::before, *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f8fafc; /* Soft off-white background */
-            color: #1e293b;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
         .auth-container {
             width: 100%;
             display: flex;
@@ -150,71 +127,67 @@
             font-weight: 600;
         }
     </style>
-</head>
-<body>
 
-<div class="auth-container">
-    <div class="auth-card">
-        <div class="auth-header">
-            <h1 class="auth-title">Create Account</h1>
-            <p class="auth-subtitle">Get started with your Real Estate CRM today</p>
-        </div>
-
-        <form action="{{ url('/register') }}" method="POST">
-            @csrf
-            <!-- Name Field -->
-            <div class="form-group">
-                <label for="name" class="form-label">Full Name</label>
-                <input type="text" name="name" id="name" class="form-control" placeholder="John Doe" value="{{ old('name') }}" required autofocus>
-                @error('name')
-                    <div class="error-message">{{ $message }}</div>
-                @enderror
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <h1 class="auth-title">Create Account</h1>
+                <p class="auth-subtitle">Get started with your Real Estate CRM today</p>
             </div>
 
-            <!-- Email Field -->
-            <div class="form-group">
-                <label for="email" class="form-label">Email Address</label>
-                <input type="email" name="email" id="email" class="form-control" placeholder="name@company.com" value="{{ old('email') }}" required>
-                @error('email')
-                    <div class="error-message">{{ $message }}</div>
-                @enderror
+            <form action="{{ url('/register') }}" method="POST">
+                @csrf
+                <!-- Name Field -->
+                <div class="form-group">
+                    <label for="name" class="form-label">Full Name</label>
+                    <input type="text" name="name" id="name" class="form-control" placeholder="John Doe" value="{{ old('name') }}" required autofocus>
+                    @error('name')
+                        <div class="error-message">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <!-- Email Field -->
+                <div class="form-group">
+                    <label for="email" class="form-label">Email Address</label>
+                    <input type="email" name="email" id="email" class="form-control" placeholder="name@company.com" value="{{ old('email') }}" required>
+                    @error('email')
+                        <div class="error-message">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <!-- Password Field -->
+                <div class="form-group">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" name="password" id="password" class="form-control" placeholder="••••••••" required>
+                    <div class="password-hint">Must be at least 8 characters and include uppercase, lowercase, numbers, and symbols.</div>
+                    @error('password')
+                        <div class="error-message">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <!-- Confirm Password Field -->
+                <div class="form-group">
+                    <label for="password_confirmation" class="form-label">Confirm Password</label>
+                    <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" placeholder="••••••••" required>
+                </div>
+
+                <button type="submit" class="btn-auth">Register & Open CRM</button>
+            </form>
+
+            <div class="auth-footer">
+                Already have an account? <a href="{{ url('/login') }}" class="auth-link">Sign In</a>
             </div>
-
-            <!-- Password Field -->
-            <div class="form-group">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" name="password" id="password" class="form-control" placeholder="••••••••" required>
-                <div class="password-hint">Must be at least 8 characters and include uppercase, lowercase, numbers, and symbols.</div>
-                @error('password')
-                    <div class="error-message">{{ $message }}</div>
-                @enderror
-            </div>
-
-            <!-- Confirm Password Field -->
-            <div class="form-group">
-                <label for="password_confirmation" class="form-label">Confirm Password</label>
-                <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" placeholder="••••••••" required>
-            </div>
-
-            <button type="submit" class="btn-auth">Register & Open CRM</button>
-        </form>
-
-        <div class="auth-footer">
-            Already have an account? <a href="{{ url('/login') }}" class="auth-link">Sign In</a>
         </div>
     </div>
-</div>
-@if($errors->any())
-    <div class="toast-msg" id="error-toast">
-        ⚠️ {{ $errors->first() }}
-    </div>
-    <script>
-        setTimeout(() => {
-            document.getElementById('error-toast').remove();
-        }, 3000);
-    </script>
-@endif
-</body>
-</html>
 
-
+    @if($errors->any())
+        <div class="toast-msg" id="error-toast">
+            ⚠️ {{ $errors->first() }}
+        </div>
+        <script>
+            setTimeout(() => {
+                document.getElementById('error-toast').remove();
+            }, 3000);
+        </script>
+    @endif
+@endsection

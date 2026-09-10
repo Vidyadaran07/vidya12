@@ -74,6 +74,24 @@
         background-color: var(--primary-hover);
     }
 
+    .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+    }
+
+    .nav-login-link {
+        color: var(--text-color);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 15px;
+        transition: color var(--transition-speed) ease;
+    }
+
+    .nav-login-link:hover {
+        color: var(--primary-color);
+    }
+
     .mobile-cta {
         display: none; /* Hidden on desktop */
     }
@@ -125,7 +143,10 @@
         }
 
         .mobile-cta {
-            display: block;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
             margin-top: 10px;
         }
 
@@ -169,15 +190,14 @@
                 <a href="#" class="nav-link">Contact</a>
             </li>
             <li class="nav-item mobile-cta">
-                <a href="#" class="nav-btn">Get Started</a>
+                <a href="{{ url('/login') }}" class="nav-login-link">Login</a>
+                <a href="{{ url('/signup') }}" class="nav-btn">Get Started</a>
             </li>
         </ul>
 
-        <div>
-            <a href="{{ url('/signup') }}"class="nav-btn">Signup</a>
-        </div>
         <div class="nav-actions">
-            <a href="#" class="nav-btn">Get Started</a>
+            <a href="{{ url('/login') }}" class="nav-login-link">Login</a>
+            <a href="{{ url('/signup') }}" class="nav-btn">Get Started</a>
         </div>
 
         <button class="menu-toggle" id="mobile-menu-btn" aria-label="Toggle navigation">

@@ -18,7 +18,8 @@ Route::middleware('guest')->group(function () {
 
     // Login
     // Route::get('/login',[AuthController::class,'loginform']);
-    Route::get('/login',[AuthController::class,'login']);
-    
+    Route::get('/login',[AuthController::class,'login'])->name('login');
+    Route::post('/login',[AuthController::class,'login'])->name('login');
+    Route::post('/login',[AuthController::class,'authenticate'])->name('authenticate');
     // Dashboard
 });

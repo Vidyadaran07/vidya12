@@ -48,6 +48,24 @@ class AuthController extends Controller
       return view('auth.login');
     }
 
+    public function authenticate(Request $request)
+    {
+       $credentials = $request->validate([
+         'email' => ['required','email'],
+         'passowrd' => ['required '],
+       ]);
+
+       if (auth()->attempt($credentials)) {
+         $request->sessions()-> regenerate();
+
+         return redirect()->intended('/dashboard');
+       }
+
+       return back()->withErrors([
+            'email' => 'The provided credentails do not match our records.',
+       ])->onlyInput('email');
+    }
+
 }
 
 
